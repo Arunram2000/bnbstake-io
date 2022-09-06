@@ -44,3 +44,39 @@ export const withdraw = async (address, provider, chainid) => {
   const tx = await stake.withdraw();
   await tx.wait();
 };
+
+export const getUserReferrer = async (address, provider, chainid) => {
+  const stake = loadContract(address, provider, chainid);
+  const referrer = await stake.getUserReferrer();
+  return referrer;
+};
+
+export const getUserTotalReferrals = async (address, provider, chainid) => {
+  const stake = loadContract(address, provider, chainid);
+  const referrer = await stake.getUserTotalReferrals();
+  return referrer.toString();
+};
+
+export const getUserTotalWithdrawn = async (address, provider, chainid) => {
+  const stake = loadContract(address, provider, chainid);
+  const referrer = await stake.getUserTotalWithdrawn();
+  return referrer.toString();
+};
+
+export const getUserCheckpoint = async (address, provider, chainid) => {
+  const stake = loadContract(address, provider, chainid);
+  const referrer = await stake.getUserCheckpoint();
+  return referrer.toString();
+};
+
+export const getUserAvailable = async (address, provider, chainid) => {
+  const stake = loadContract(address, provider, chainid);
+  const referrer = await stake.getUserAvailable();
+  return referrer.toString();
+};
+
+export const getUserTotalDeposits = async (address, provider, chainid) => {
+  const stake = loadContract(address, provider, chainid);
+  const referrer = await stake.getUserTotalDeposits();
+  return referrer.toString();
+};
