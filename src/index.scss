@@ -1,0 +1,98 @@
+@use "./styles";
+
+:root {
+  --color-background: #fff;
+}
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-background);
+  min-height: 100vh;
+  font-size: 1.6rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.mx {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.pad {
+  padding: 0 3rem;
+
+  @media (max-width: 768px) {
+    padding: 0 2rem;
+  }
+  @media (max-width: 576px) {
+    padding: 0 1.25rem;
+  }
+}
+
+@for $i from 5 to 51 {
+  .p-#{$i} {
+    padding: $i + px;
+  }
+  .pt-#{$i} {
+    padding-top: $i + px;
+  }
+  .pl-#{$i} {
+    padding-left: $i + px;
+  }
+  .pr-#{$i} {
+    padding-right: $i + px;
+  }
+  .pb-#{$i} {
+    padding-bottom: $i + px;
+  }
+  .m-#{$i} {
+    margin: $i + px;
+  }
+  .mt-#{$i} {
+    margin-top: $i + px;
+  }
+  .ml-#{$i} {
+    margin-left: $i + px;
+  }
+  .mr-#{$i} {
+    margin-right: $i + px;
+  }
+  .mb-#{$i} {
+    margin-bottom: $i + px;
+  }
+  .g-#{$i} {
+    gap: $i + px;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

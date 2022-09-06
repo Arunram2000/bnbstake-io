@@ -1,0 +1,63 @@
+@use "../../styles";
+
+%base-styles {
+  outline: none;
+  border: none;
+  padding: 0.8rem 3rem;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  @include styles.fontSemibold();
+  border-radius: 100px;
+  text-transform: capitalize;
+
+  &:disabled {
+    cursor: no-drop;
+    opacity: 0.7;
+  }
+}
+
+.btn-primary {
+  @extend %base-styles;
+  background: styles.$btn-primary;
+  color: #fff;
+  border: 2px solid styles.$white;
+}
+
+.btn-secondary {
+  @extend %base-styles;
+  background: transparent;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.btn-error {
+  @extend %base-styles;
+  background-color: tomato;
+  color: var(--text-primary);
+  box-shadow: 0px 4px 10px rgba(255, 99, 71, 0.25);
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.lg {
+  padding: 0.8rem 3rem;
+  font-size: 1.6rem;
+}
+
+.sm {
+  padding: 0.8rem 3rem;
+  font-size: 1.2rem;
+}
+
+.md {
+  padding: 0.5rem 2rem;
+  font-size: 1.4rem;
+}
+
+.full-width {
+  width: 100%;
+}

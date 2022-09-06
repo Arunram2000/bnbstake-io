@@ -1,0 +1,110 @@
+@use "./colors";
+
+[class*="text-primary"] {
+  color: colors.$text-primary;
+}
+
+[class*="text-secondary"] {
+  color: colors.$text-secondary;
+}
+
+[class*="text-success"] {
+  color: colors.$success;
+}
+
+[class*="label-primary"] {
+  color: colors.$label-primary;
+}
+
+[class*="label-secondary"] {
+  color: colors.$label-secondary;
+}
+
+[class*="warning"] {
+  color: colors.$warning;
+}
+
+.error {
+  color: colors.$error;
+}
+
+.success {
+  color: colors.$success;
+}
+
+[class*="flex"] {
+  display: flex;
+  align-items: center;
+}
+
+[class*="flex-center"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[class*="flex-end"] {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+[class*="flex-start"] {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+[class*="flex-between"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+[class*="flex-row"] {
+  flex-direction: row;
+}
+
+[class*="flex-column"] {
+  flex-direction: column;
+}
+
+[class*="flex-wrap"] {
+  flex-wrap: wrap;
+}
+
+[class*="flex-nowrap"] {
+  flex-wrap: nowrap;
+}
+
+[class*="justify-center"] {
+  justify-content: center;
+}
+
+[class*="justify-start"] {
+  justify-content: flex-start;
+}
+
+[class*="justify-end"] {
+  justify-content: flex-end;
+}
+
+[class*="justify-baseline"] {
+  justify-content: baseline;
+}
+
+[class*="align-center"] {
+  align-items: center;
+}
+
+[class*="align-start"] {
+  align-items: flex-start;
+}
+
+[class*="align-end"] {
+  align-items: flex-end;
+}
+
+[class*="align-baseline"] {
+  align-items: baseline;
+}
