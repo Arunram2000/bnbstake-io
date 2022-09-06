@@ -1,37 +1,3 @@
-@use "./colors";
-
-[class*="text-primary"] {
-  color: colors.$text-primary;
-}
-
-[class*="text-secondary"] {
-  color: colors.$text-secondary;
-}
-
-[class*="text-success"] {
-  color: colors.$success;
-}
-
-[class*="label-primary"] {
-  color: colors.$label-primary;
-}
-
-[class*="label-secondary"] {
-  color: colors.$label-secondary;
-}
-
-[class*="warning"] {
-  color: colors.$warning;
-}
-
-.error {
-  color: colors.$error;
-}
-
-.success {
-  color: colors.$success;
-}
-
 [class*="flex"] {
   display: flex;
   align-items: center;

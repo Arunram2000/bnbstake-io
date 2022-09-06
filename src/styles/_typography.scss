@@ -1,28 +1,22 @@
-@use "./colors";
-@use "./fonts";
-
 h1 {
   font-size: 5rem;
-  @include fonts.fontRegular();
+  font-weight: 600;
   line-height: 6.5rem;
-  letter-spacing: -0.05em;
-  color: var(--color-primary-variant);
+  color: var(--color-primary);
 }
 
 h2 {
-  @include fonts.fontRegular();
-  font-size: 3.5rem;
-  line-height: 4.25rem;
-  letter-spacing: -0.09rem;
-  color: var(--color-primary-variant);
+  font-weight: 600;
+  font-size: 4rem;
+  line-height: 5rem;
+  letter-spacing: 0.02em;
 }
 
 h3 {
-  @include fonts.fontRegular();
-  font-size: 3rem;
-  line-height: 3.8rem;
-  letter-spacing: -0.09rem;
-  color: var(--color-primary-variant);
+  font-weight: 600;
+  font-size: 3.2rem;
+  line-height: 4rem;
+  color: var(--color-primary);
 }
 
 p {

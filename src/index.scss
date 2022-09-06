@@ -1,7 +1,10 @@
 @use "./styles";
 
 :root {
-  --color-background: #fff;
+  --color-background: #eeeeee;
+  --color-primary: #303841;
+  --color-white: #ffffff;
+  --color-black: #000000;
 }
 
 *,
@@ -10,6 +13,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
 }
 
 html {

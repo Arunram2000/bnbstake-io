@@ -3,16 +3,16 @@
 %base-styles {
   outline: none;
   border: none;
-  padding: 0.8rem 3rem;
+  padding: 1.6rem 3.2rem;
   font-size: 1.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   cursor: pointer;
-  @include styles.fontSemibold();
-  border-radius: 100px;
+  border-radius: 5px;
   text-transform: capitalize;
+  font-weight: 500;
 
   &:disabled {
     cursor: no-drop;
@@ -22,40 +22,40 @@
 
 .btn-primary {
   @extend %base-styles;
-  background: styles.$btn-primary;
+  background: var(--color-primary);
   color: #fff;
-  border: 2px solid styles.$white;
+  border: 1px solid var(--color-primary);
 }
 
 .btn-secondary {
   @extend %base-styles;
-  background: transparent;
-  color: #000;
-  border: 1px solid #000;
+  background: var(--color-white);
+  color: var(--color-primary);
+  border: 1px solid var(--color-white);
 }
 
 .btn-error {
   @extend %base-styles;
   background-color: tomato;
-  color: var(--text-primary);
+  color: #fff;
   box-shadow: 0px 4px 10px rgba(255, 99, 71, 0.25);
   padding: 0.5rem;
   font-size: 1.2rem;
 }
 
 .lg {
-  padding: 0.8rem 3rem;
-  font-size: 1.6rem;
+  padding: 2.4rem 4rem;
+  font-size: 2rem;
 }
 
 .sm {
-  padding: 0.8rem 3rem;
-  font-size: 1.2rem;
+  padding: 0.8rem 2.4rem;
+  font-size: 1.4rem;
 }
 
 .md {
-  padding: 0.5rem 2rem;
-  font-size: 1.4rem;
+  padding: 1.6rem 3.2rem;
+  font-size: 1.6rem;
 }
 
 .full-width {

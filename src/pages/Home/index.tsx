@@ -1,12 +1,15 @@
-import { useWeb3React } from "@web3-react/core";
 import React from "react";
-import { getMinimumDepositAmount, invest } from "utils/methods";
 import "./Home.scss";
+import Hero from "./Hero";
+import CalculateProfit from "./CalculateProfit";
 
-const Home = () => {
-  const { account, chainId, library } = useWeb3React();
-
-  return <div>Home</div>;
+const Home: React.FC = () => {
+  return (
+    <main className="home">
+      <Hero />
+      <CalculateProfit />
+    </main>
+  );
 };
 
 export default Home;
