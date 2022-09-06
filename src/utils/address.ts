@@ -3,7 +3,7 @@ const TOKEN_ADDRESS = {
 };
 
 const STAKE_ADDRESS = {
-  4: "",
+  4: "0xE2Ed8265e0318e5D41B7A457c66636ea0Fd68b02",
 };
 
 export { TOKEN_ADDRESS, STAKE_ADDRESS };
