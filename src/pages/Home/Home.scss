@@ -159,4 +159,129 @@
       }
     }
   }
+  .your-farm-read {
+    background-color: #fff;
+    padding: 1rem 1rem 3rem;
+    .your-farm {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      @media (max-width: 1050px) {
+        grid-template-columns: 0.7fr 1fr;
+      }
+      .tire-deposite {
+        text-align: center;
+        img {
+          width: 24rem;
+          height: 25.9rem;
+        }
+        .total-deposite {
+          background-color: var(--color-background);
+          padding: 2rem 5rem;
+          text-align: left;
+          width: 80%;
+          margin: 2rem;
+          border-radius: 1rem;
+        }
+      }
+      .farm-deposits {
+        padding-right: 3rem;
+        .farm {
+          text-align: left;
+          border: 1px solid #eeeeee;
+          padding: 1rem;
+          .withdraw {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 9rem 1rem 0;
+            button {
+              width: 14.5rem;
+            }
+          }
+        }
+        .last-deposits {
+          border: 1px solid #eeeeee;
+          padding: 1rem;
+          height: 23rem;
+          margin: 2rem 0;
+        }
+        .farm-buttons {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+    .read {
+      border: 1px solid #eeeeee;
+      padding: 3rem 2rem;
+      p {
+        padding-top: 1.5rem;
+      }
+    }
+  }
+  .start-journey {
+    text-align: center;
+    padding: 3rem 0;
+    .yield-farm {
+      h3 {
+        font-weight: 100;
+      }
+    }
+    .stake-community {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 3rem;
+      .stake {
+        padding: 0px 1rem;
+        h3 {
+          padding: 0.2rem 0;
+          font-size: 1.6rem;
+        }
+        p {
+          line-height: 1.5rem;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  .footer {
+    text-align: center;
+    background-color: #fff;
+    padding: 4rem 0 0;
+    .dapp-logo {
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      padding-bottom: 3rem;
+      img {
+        width: 20%;
+      }
+      span {
+        border-left: 1px solid #eeeeee;
+        padding: 4rem 0rem 0rem;
+      }
+    }
+    .icon {
+      padding-bottom: 2rem;
+      p {
+        padding-bottom: 1.5rem;
+      }
+      .icons {
+        display: flex;
+        justify-content: center;
+        gap: 4rem;
+      }
+    }
+    .copyright {
+      background: #313942;
+      padding: 1.5rem;
+      color: #fff;
+      h4 {
+        padding-bottom: 1rem;
+      }
+      span {
+        font-weight: bold;
+      }
+    }
+  }
 }
