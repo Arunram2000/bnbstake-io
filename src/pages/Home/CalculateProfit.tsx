@@ -1,6 +1,6 @@
 import React from "react";
 import AffilateProgram from "./AffilateProgram";
-import Depoist from "./Depoist";
+import Depoist from "./Deposit";
 
 const CalculateProfit = () => {
   return (

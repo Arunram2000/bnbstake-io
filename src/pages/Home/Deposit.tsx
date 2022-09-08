@@ -16,7 +16,7 @@ const Depoist = () => {
   const { account, chainId, library } = useWeb3React();
   const [plans, setPlans] = useState<IPlan[]>([]);
   const [selectedPlan, setSelectedPlan] = useState<IPlan | undefined>();
-  const [depositAmount, setDepositAmount] = useState("");
+  const [depositAmount, setDepositAmount] = useState("1");
   const { setTransaction } = useContext(TransactionContext);
 
   const handleGetplansData = useCallback(async () => {
@@ -54,19 +54,23 @@ const Depoist = () => {
       <section className="deposit_controls">
         <div>
           <p>Deposit Period (days)</p>
-          <select
-            onChange={(e) => setSelectedPlan(plans.find((f) => f.time === Number(e.target.value)))}
-          >
-            {plans.map((plan, index) => (
-              <option key={index.toString()} value={plan.time}>
-                {plan.time}
-              </option>
-            ))}
-          </select>
+          <div className="select_input">
+            <select
+              onChange={(e) =>
+                setSelectedPlan(plans.find((f) => f.time === Number(e.target.value)))
+              }
+            >
+              {plans.map((plan, index) => (
+                <option key={index.toString()} value={plan.time}>
+                  {plan.time}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
         <div>
           <p>Deposit Amount</p>
-          <div>
+          <div className="deposit_input">
             <input
               type="number"
               value={depositAmount}

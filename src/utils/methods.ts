@@ -1,11 +1,11 @@
 import { ethers, utils } from "ethers";
-import tokenABi from "./abi/bnbstake.json";
+import stakeABi from "./abi/bnbstake.json";
 import { STAKE_ADDRESS } from "./address";
 
 export const loadContract = (address: string, provider, chainid: string | number) => {
   const etherProvider = new ethers.providers.Web3Provider(provider);
   const signer = etherProvider.getSigner(address);
-  const escrowContract = new ethers.Contract(STAKE_ADDRESS[chainid], tokenABi, signer);
+  const escrowContract = new ethers.Contract(STAKE_ADDRESS[chainid], stakeABi, signer);
   return escrowContract;
 };
 
@@ -99,4 +99,16 @@ export const getPlanInfo = async (address: string, provider, chainid: number | s
   );
 
   return data;
+};
+
+export const getContractInfo = async (address: string, provider, chainid: number | string) => {
+  const stakingContract = loadContract(address, provider, chainid);
+  const data = await stakingContract.getSiteInfo();
+  const result = {
+    totalDeposited: Number(utils.formatUnits(data[0].toString()).toString()),
+    totalBonus: Number(utils.formatUnits(data[1].toString()).toString()),
+  };
+
+  console.log(result);
+  return result;
 };

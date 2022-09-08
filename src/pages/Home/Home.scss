@@ -2,6 +2,12 @@
   .hero {
     height: calc(100vh - 100px);
     position: relative;
+    background: linear-gradient(180deg, #eeeeee 0%, #ffffff 100%);
+    padding: 0 15rem;
+
+    .mx {
+      height: 100%;
+    }
 
     .hero_content {
       display: flex;
@@ -12,6 +18,8 @@
       max-width: 50%;
       width: 100%;
       height: 100%;
+      position: relative;
+      z-index: 1;
 
       h1 {
         font-size: 8rem;
@@ -24,7 +32,62 @@
       top: 50%;
       left: 75%;
       transform: translate(-50%, -50%);
-      z-index: -1;
+      z-index: 0;
+      width: 400px;
+      height: 400px;
+
+      .logo1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateX(-25%);
+        animation: logo1 4s linear infinite;
+
+        @keyframes logo1 {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+      }
+
+      .logo2 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: logo2 4s linear infinite;
+
+        @keyframes logo2 {
+          0%,
+          100% {
+            transform: translate(-50%, calc(-50% + 0px));
+          }
+          50% {
+            transform: translate(-50%, calc(-50% + 10px));
+          }
+        }
+      }
+
+      .logo3 {
+        position: absolute;
+        top: 0;
+        left: 35%;
+        animation: logo3 4s linear infinite;
+
+        @keyframes logo3 {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(10px);
+          }
+        }
+      }
 
       img {
         width: 50rem;
@@ -63,17 +126,66 @@
 
       .deposit {
         padding: 6rem;
-        background-color: var(--color-primary);
+        background: #3a4750;
         color: var(--color-white);
         display: flex;
         flex-direction: column;
+        justify-content: center;
         gap: 4rem;
         border-radius: 10px;
+        box-shadow: inset -8px -8px 16px #26333c, inset 8px 8px 16px #58656e;
 
         .deposit_controls {
           display: flex;
           align-items: center;
           justify-content: space-between;
+
+          > div {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+
+            .select_input {
+              background-color: var(--color-primary);
+              border-radius: 5px;
+              padding: 8px 16px;
+              max-width: 130px;
+              width: 100%;
+
+              select {
+                outline: none;
+                border: none;
+                background-color: transparent;
+                color: #fff;
+                width: 100%;
+              }
+            }
+
+            .deposit_input {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 0.5rem;
+              background-color: var(--color-primary);
+              border-radius: 5px;
+              padding: 8px 16px;
+              input {
+                outline: none;
+                border: none;
+                background-color: transparent;
+                color: #fff;
+                width: 100%;
+              }
+
+              button {
+                background-color: transparent;
+                color: #fff;
+                font-size: 1.6rem;
+                outline: none;
+                border: none;
+              }
+            }
+          }
         }
 
         .deposit_stats {
@@ -94,21 +206,24 @@
 
       .affilate_program {
         padding: 6rem;
-        background-color: var(--color-background);
         border-radius: 10px;
+        background: #dae7f0;
+        box-shadow: inset -8px -8px 16px #c6d3dc, inset 8px 8px 16px #eefbff;
 
         .referral_link {
           padding: 1.6rem;
-          background-color: #fff;
           border-radius: 10px;
           margin-bottom: 1rem;
+          background: #eeeeee;
+          box-shadow: inset -4px -4px 4px #dadada, inset 4px 4px 4px #ffffff;
+          border-radius: 5px;
 
           > div {
             display: grid;
             grid-template-columns: 70% 30%;
 
             p {
-              background-color: var(--color-background);
+              background-color: #fff;
               width: 100%;
               border-radius: 10px 0 0 10px;
               display: flex;
@@ -137,7 +252,6 @@
           align-items: flex-end;
 
           > div {
-            background-color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -146,6 +260,9 @@
             padding: 0.8rem;
             border-radius: 10px;
             height: 100%;
+            background: #eeeeee;
+            box-shadow: inset -2px -2px 4px #dadada, inset 2px 2px 4px #ffffff;
+            border-radius: 10px;
 
             &:nth-child(2) {
               height: 80%;
@@ -168,6 +285,143 @@
             }
           }
         }
+      }
+    }
+  }
+  .your-farm-read {
+    background-color: #fff;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    .your-farm {
+      display: flex;
+
+      margin-bottom: 3rem;
+      gap: 5rem;
+
+      @media (max-width: 1050px) {
+        grid-template-columns: 0.7fr 1fr;
+      }
+      .tire-deposite {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 3.2rem;
+        max-width: 350px;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+        .total-deposite {
+          background-color: var(--color-background);
+          padding: 2rem 5rem;
+          text-align: left;
+          border-radius: 1rem;
+          box-shadow: inset -4px -4px 8px #dadada, inset 4px 4px 8px #f5f5f5;
+        }
+      }
+      .farm-deposits {
+        width: 100%;
+
+        .farm {
+          text-align: left;
+          border: 1px solid #eeeeee;
+          padding: 1rem;
+          .withdraw {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 9rem 1rem 0;
+            button {
+              width: 14.5rem;
+            }
+          }
+        }
+        .last-deposits {
+          border: 1px solid #eeeeee;
+          padding: 1rem;
+          height: 23rem;
+          margin: 2rem 0;
+        }
+        .farm-buttons {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+    .read {
+      border: 1px solid #eeeeee;
+      padding: 3rem 2rem;
+      border-radius: 10px;
+
+      p {
+        padding-top: 1.5rem;
+      }
+    }
+  }
+  .start-journey {
+    text-align: center;
+    padding: 5rem 0;
+    .yield-farm {
+      h3 {
+        font-weight: 100;
+      }
+    }
+    .stake-community {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 3rem;
+      .stake {
+        padding: 0px 1rem;
+        h3 {
+          padding: 0.2rem 0;
+          font-size: 1.6rem;
+        }
+        p {
+          line-height: 1.5rem;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  .footer {
+    text-align: center;
+    background-color: #fff;
+    padding: 5rem 0 0;
+    .dapp-logo {
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      padding-bottom: 3rem;
+      img {
+        width: 20%;
+      }
+      span {
+        border-left: 1px solid #eeeeee;
+        padding: 4rem 0rem 0rem;
+      }
+    }
+    .icon {
+      padding-bottom: 5rem;
+      p {
+        padding-bottom: 1.5rem;
+      }
+      .icons {
+        display: flex;
+        justify-content: center;
+        gap: 4rem;
+      }
+    }
+    .copyright {
+      background: #313942;
+      padding: 1.5rem;
+      color: #fff;
+      h4 {
+        padding-bottom: 1rem;
+      }
+      span {
+        font-weight: bold;
       }
     }
   }

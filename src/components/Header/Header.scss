@@ -1,9 +1,17 @@
 header {
   padding: 2.4rem 0;
+  background: rgba(238, 238, 238, 0.1);
+  backdrop-filter: blur(30px);
 
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .logo {
+      img {
+        height: 50px;
+      }
+    }
   }
 }

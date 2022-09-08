@@ -1,3 +1,11 @@
+[class*="font-medium"] {
+  font-weight: 500;
+}
+
+[class*="font-bold"] {
+  font-weight: 600;
+}
+
 [class*="flex"] {
   display: flex;
   align-items: center;

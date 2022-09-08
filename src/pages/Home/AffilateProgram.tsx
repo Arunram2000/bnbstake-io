@@ -41,7 +41,7 @@ const AffilateProgram = () => {
         </div>
       </div>
       <section className="referral_link">
-        <p>Your personal link</p>
+        <p className="font-medium mb-15">Your personal link</p>
         <div>
           <p>
             <span>Not activated yet!</span>
