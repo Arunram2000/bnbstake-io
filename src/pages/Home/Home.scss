@@ -21,9 +21,27 @@
       position: relative;
       z-index: 1;
 
+      @media (max-width: 1000px) {
+        max-width: 75%;
+      }
+
+      @media (max-width: 768px) {
+        max-width: 100%;
+      }
+
       h1 {
         font-size: 8rem;
         line-height: 9rem;
+
+        @media (max-width: 1000px) {
+          font-size: 7rem;
+          line-height: 8rem;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 6rem;
+          line-height: 7rem;
+        }
       }
     }
 
@@ -135,6 +153,10 @@
         border-radius: 10px;
         box-shadow: inset -8px -8px 16px #26333c, inset 8px 8px 16px #58656e;
 
+        @media (max-width: 576px) {
+          padding: 4rem;
+        }
+
         .deposit_controls {
           display: flex;
           align-items: center;
@@ -210,6 +232,10 @@
         background: #dae7f0;
         box-shadow: inset -8px -8px 16px #c6d3dc, inset 8px 8px 16px #eefbff;
 
+        @media (max-width: 576px) {
+          padding: 4rem;
+        }
+
         .referral_link {
           padding: 1.6rem;
           border-radius: 10px;
@@ -229,6 +255,12 @@
               display: flex;
               align-items: center;
               padding: 0 1.6rem;
+              overflow-x: hidden;
+
+              span {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
             }
           }
         }
@@ -250,6 +282,11 @@
           gap: 1.6rem;
           margin: 1.6rem 0;
           align-items: flex-end;
+
+          @media (max-width: 576px) {
+            grid-template-columns: repeat(5, 50px);
+            gap: 1rem;
+          }
 
           > div {
             display: flex;
@@ -295,12 +332,11 @@
 
     .your-farm {
       display: flex;
-
       margin-bottom: 3rem;
       gap: 5rem;
 
-      @media (max-width: 1050px) {
-        grid-template-columns: 0.7fr 1fr;
+      @media (max-width: 800px) {
+        flex-direction: column;
       }
       .tire-deposite {
         text-align: center;
@@ -309,9 +345,20 @@
         gap: 3.2rem;
         max-width: 350px;
 
+        @media (max-width: 800px) {
+          max-width: 100%;
+          justify-content: center;
+          align-items: center;
+        }
+
         img {
+          max-width: 100%;
           width: 100%;
           height: auto;
+
+          @media (max-width: 800px) {
+            max-width: 350px;
+          }
         }
         .total-deposite {
           background-color: var(--color-background);
@@ -328,11 +375,12 @@
           text-align: left;
           border: 1px solid #eeeeee;
           padding: 1rem;
+          border-radius: 10px;
           .withdraw {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 1rem 9rem 1rem 0;
+            margin: 1rem 0;
             button {
               width: 14.5rem;
             }
@@ -343,10 +391,22 @@
           padding: 1rem;
           height: 23rem;
           margin: 2rem 0;
+          border-radius: 10px;
         }
         .farm-buttons {
           display: flex;
           justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 2rem;
+
+          @media (max-width: 800px) {
+            flex-direction: column;
+          }
+
+          button {
+            flex: 1;
+            white-space: nowrap;
+          }
         }
       }
     }
@@ -372,6 +432,16 @@
       display: flex;
       justify-content: space-between;
       padding-top: 3rem;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+
+        .stake {
+          max-width: 350px;
+        }
+      }
+
       .stake {
         padding: 0px 1rem;
         h3 {

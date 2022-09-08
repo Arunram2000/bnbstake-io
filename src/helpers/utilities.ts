@@ -15,7 +15,7 @@ export const formatNumber = (value: number, minDigit = 0, maxDigit = 6) => {
 };
 
 export const formatEther = (value: number | string, decimals = 18) =>
-  utils.formatUnits(value.toString(), decimals.toString());
+  Number(utils.formatUnits(value.toString(), decimals.toString()));
 
 export const parseEther = (value: number | string, decimals = 18) =>
   Number(utils.parseUnits(value.toString(), decimals.toString()).toString());

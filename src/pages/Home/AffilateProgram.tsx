@@ -1,7 +1,13 @@
-import { Button } from "components";
 import React from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
+import { Button } from "components";
+import { getSlicedValue } from "helpers/utilities";
+import { useUserData } from "hooks";
 
 const AffilateProgram = () => {
+  const { isDeposited, address } = useUserData();
+
   return (
     <div className="affilate_program">
       <h3>Affiliate Program</h3>
@@ -44,7 +50,13 @@ const AffilateProgram = () => {
         <p className="font-medium mb-15">Your personal link</p>
         <div>
           <p>
-            <span>Not activated yet!</span>
+            {isDeposited ? (
+              <CopyToClipboard text={`${window.location.origin}?ref_address=${address}`}>
+                <span>{`${window.location.origin}?ref_address=${getSlicedValue(address)}`}</span>
+              </CopyToClipboard>
+            ) : (
+              <span>Not activated yet!</span>
+            )}
           </p>
           <Button>Copy</Button>
         </div>
