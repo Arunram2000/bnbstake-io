@@ -541,3 +541,20 @@
     }
   }
 }
+
+.history_modal {
+  width: 100%;
+
+  table {
+    width: 100%;
+
+    thead th {
+      font-weight: 500;
+    }
+
+    td,
+    th {
+      padding: 0.5rem 1rem;
+    }
+  }
+}

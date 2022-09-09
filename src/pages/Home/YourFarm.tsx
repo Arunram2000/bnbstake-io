@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import moment from "moment";
 
-import { Button } from "components";
+import { Button, Modal } from "components";
 import telegram from "assets/icons/telegram.png";
 import { ReactComponent as VerifiedIcon } from "assets/icons/verified.svg";
 import { ReactComponent as ShareIcon } from "assets/icons/share.svg";
@@ -19,6 +19,7 @@ const YourFarm = () => {
   const { userDividends, totalDeposit } = useUserData();
   const { setTransaction } = useContext(TransactionContext);
   const [depositStats, setDepositStats] = useState<IDepositStats[]>([]);
+  const [history, setHistory] = useState(false);
 
   const handleGetplansData = useCallback(async () => {
     if (!account || !chainId) return;
@@ -43,37 +44,35 @@ const YourFarm = () => {
       await withdraw(account, library?.provider, chainId);
       setTransaction({ loading: true, status: "success" });
     } catch (error) {
-      setTransaction({ loading: true, status: "pending" });
+      setTransaction({ loading: true, status: "error" });
     }
   };
 
+  const renderTable = (
+    <table>
+      <thead>
+        <tr>
+          <th align="left">Date</th>
+          <th>Plan</th>
+          <th>Status</th>
+          <th align="right">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {depositStats.map((d, index) => (
+          <tr key={index.toString()}>
+            <td>{moment(d.start * 1000).format("ll")}</td>
+            <td align="center">{d.plan}</td>
+            <td align="center">{"Success"}</td>
+            <td align="right">{d.amount} CRO</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+
   const renderDepositStats = (
-    <div className="deposit_stats-table">
-      {!depositStats.length ? null : (
-        <table>
-          <thead>
-            <tr>
-              <th align="left">Date</th>
-              <th>Plan</th>
-              <th>Status</th>
-              <th align="right">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {depositStats.map((d, index) => (
-              <tr key={index.toString()}>
-                <td>{moment(d.start * 1000).format("ll")}</td>
-                <td align="center">{d.plan}</td>
-                <td align="center">
-                  {moment().diff(d.finish * 1000, "second") > 0 ? "Finished" : "Pending"}
-                </td>
-                <td align="right">{d.amount} CRO</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+    <div className="deposit_stats-table">{!depositStats.length ? null : renderTable}</div>
   );
 
   return (
@@ -86,12 +85,12 @@ const YourFarm = () => {
               <div className="total-deposite">
                 <p>Total Value Deposited</p>
                 <h3>{contractInfo ? formatNumber(contractInfo.totalDeposited, 2, 6) : 0} CRO</h3>
-                <p>$ 6,412.43</p>
+                {/* <p>$ 6,412.43</p> */}
               </div>
               <div className="total-deposite">
                 <p>Total Referral Earnings</p>
                 <h3>{contractInfo ? formatNumber(contractInfo.totalBonus, 2, 6) : 0} CRO</h3>
-                <p>$ 6,412.43</p>
+                {/* <p>$ 6,412.43</p> */}
               </div>
             </div>
             <div className="farm-deposits">
@@ -103,7 +102,7 @@ const YourFarm = () => {
                   <div>
                     <p style={{ fontSize: "12px" }}>CRO to Harvest</p>
                     <p className="font-medium">{formatNumber(userDividends, 2, 6)} CRO</p>
-                    <p style={{ fontSize: "12px" }}>$ 0.00</p>
+                    {/* <p style={{ fontSize: "12px" }}>$ 0.00</p> */}
                   </div>
                   <Button children="Withdraw" variant="primary" onClick={() => handleWithdraw()} />
                 </div>
@@ -111,9 +110,9 @@ const YourFarm = () => {
                   <div>
                     <p style={{ fontSize: "12px" }}>CRO in wallet</p>
                     <p className="font-medium">{formatNumber(totalDeposit, 2, 6)} CRO</p>
-                    <p style={{ fontSize: "12px" }}>$ 0.00</p>
+                    {/* <p style={{ fontSize: "12px" }}>$ 0.00</p> */}
                   </div>
-                  <Button children="History" variant="primary" />
+                  <Button children="History" variant="primary" onClick={() => setHistory(true)} />
                 </div>
               </div>
               <div className="last-deposits">
@@ -155,6 +154,12 @@ const YourFarm = () => {
           </div>
         </div>
       </div>
+      <Modal isOpen={history} handleClose={() => setHistory(false)}>
+        <div className="history_modal">
+          <h3 className="mb-20">Deposit history</h3>
+          {renderTable}
+        </div>
+      </Modal>
     </div>
   );
 };

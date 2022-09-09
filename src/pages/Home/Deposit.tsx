@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from "re
 import { useWeb3React } from "@web3-react/core";
 
 import { Button } from "components";
-import { getPlanInfo } from "utils/methods";
+import { getMinimumDepositAmount, getPlanInfo } from "utils/methods";
 import { formatNumber } from "helpers/utilities";
 import { TransactionContext } from "store/context/TransactionContext";
 import { useUserData } from "hooks";
@@ -18,15 +18,17 @@ const Depoist = () => {
   const { account, chainId, library } = useWeb3React();
   const [plans, setPlans] = useState<IPlan[]>([]);
   const [selectedPlan, setSelectedPlan] = useState<IPlan | undefined>();
-  const [depositAmount, setDepositAmount] = useState("1");
+  const [depositAmount, setDepositAmount] = useState("1000");
   const { setTransaction } = useContext(TransactionContext);
   const { balance, referrer } = useUserData();
   const [searchParams] = useSearchParams();
+  const [minimumDepositAmount, setMinimumDepositAmount] = useState(0.5);
   const ref_address = searchParams.get("ref_address");
 
   const handleGetplansData = useCallback(async () => {
     if (!account || !chainId) return;
     const data = await getPlanInfo(account, library?.provider, chainId);
+    setMinimumDepositAmount(await getMinimumDepositAmount(account, library?.provider, chainId));
     setPlans(data);
     setSelectedPlan(data[0]);
   }, [account, chainId, library]);
@@ -45,6 +47,12 @@ const Depoist = () => {
   const handleInvest = async () => {
     try {
       if (!account || !chainId || !selectedPlan) return;
+      if (Number(depositAmount) < minimumDepositAmount)
+        return setTransaction({
+          loading: true,
+          status: "error",
+          message: `minimum deposit amount is ${minimumDepositAmount} CRO`,
+        });
       if (!balance || balance < Number(depositAmount))
         return setTransaction({
           loading: true,

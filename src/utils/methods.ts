@@ -19,7 +19,13 @@ export const getMinimumDepositAmount = async (
 ) => {
   const stake = loadContract(address, provider, chainid);
   const minimumDepositAmt = await stake.INVEST_MIN_AMOUNT();
-  return Number(minimumDepositAmt.toString());
+  return formatEther(minimumDepositAmt.toString());
+};
+
+export const getOwnerAddress = async (address: string, provider, chainid: number | string) => {
+  const stakeContract = loadContract(address, provider, chainid);
+  const ownerAddress = await stakeContract.ceoWallet1();
+  return ownerAddress;
 };
 
 export const invest = async (
@@ -32,7 +38,6 @@ export const invest = async (
 ) => {
   const stake = loadContract(address, provider, chainid);
   const amtinWei = utils.parseEther(amount.toString()).toString();
-  console.log(referrer);
   const userAllowance = await getUserAllowance(address, provider, chainid);
 
   if (userAllowance < Number(amount)) {
@@ -110,7 +115,6 @@ export const getUserDepositStats = async (
     })
   );
 
-  console.log(data);
   return data;
 };
 
@@ -166,6 +170,5 @@ export const getContractInfo = async (address: string, provider, chainid: number
     totalBonus: Number(utils.formatUnits(data[1].toString()).toString()),
   };
 
-  console.log(result);
   return result;
 };

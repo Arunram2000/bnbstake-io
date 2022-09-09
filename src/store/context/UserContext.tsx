@@ -40,7 +40,7 @@ const UserContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     if (!chainId || !account) return;
     setUserData(await getUserData(account, library?.provider, chainId));
   }, [account, library, chainId]);
-  console.log(userData);
+
   useEffect(() => {
     handleGetUserData();
   }, [handleGetUserData]);
