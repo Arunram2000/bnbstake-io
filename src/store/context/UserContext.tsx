@@ -14,6 +14,7 @@ interface IUserContext {
   totalReferrals: number;
   userDividends: number;
   isDeposited: boolean;
+  totalReferralCount: number;
 }
 
 const initialState: IUserContext = {
@@ -26,6 +27,7 @@ const initialState: IUserContext = {
   totalReferrals: 0,
   userDividends: 0,
   isDeposited: false,
+  totalReferralCount: 0,
 };
 
 export const UserContext = createContext<IUserContext>(initialState);

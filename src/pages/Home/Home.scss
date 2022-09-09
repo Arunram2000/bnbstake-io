@@ -59,7 +59,7 @@
         top: 0;
         left: 0;
         transform: translateX(-25%);
-        animation: logo1 4s linear infinite;
+        animation: logo1 5s linear infinite;
 
         @keyframes logo1 {
           0%,
@@ -77,7 +77,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        animation: logo2 4s linear infinite;
+        animation: logo2 5s linear infinite;
 
         @keyframes logo2 {
           0%,
@@ -94,7 +94,7 @@
         position: absolute;
         top: 0;
         left: 35%;
-        animation: logo3 4s linear infinite;
+        animation: logo3 5s linear infinite;
 
         @keyframes logo3 {
           0%,
@@ -389,7 +389,8 @@
         .last-deposits {
           border: 1px solid #eeeeee;
           padding: 1rem;
-          height: 23rem;
+          min-height: 23rem;
+          height: auto;
           margin: 2rem 0;
           border-radius: 10px;
         }
@@ -403,9 +404,13 @@
             flex-direction: column;
           }
 
-          button {
+          > a {
             flex: 1;
             white-space: nowrap;
+
+            button {
+              width: 100%;
+            }
           }
         }
       }
@@ -493,6 +498,24 @@
       span {
         font-weight: bold;
       }
+    }
+  }
+}
+
+.deposit_stats-table {
+  width: 100%;
+  padding: 2rem 0;
+
+  table {
+    width: 100%;
+
+    thead th {
+      font-weight: 500;
+    }
+
+    td,
+    th {
+      padding: 0.5rem 1rem;
     }
   }
 }

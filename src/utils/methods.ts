@@ -1,3 +1,4 @@
+import { IDepositStats } from "constants/types";
 import { ethers, utils } from "ethers";
 import { formatEther } from "helpers/utilities";
 import stakeABi from "./abi/bnbstake.json";
@@ -31,7 +32,7 @@ export const invest = async (
 ) => {
   const stake = loadContract(address, provider, chainid);
   const amtinWei = utils.parseEther(amount.toString()).toString();
-
+  console.log(referrer);
   const userAllowance = await getUserAllowance(address, provider, chainid);
 
   if (userAllowance < Number(amount)) {
@@ -52,6 +53,7 @@ export const getUserData = async (address: string, provider, chainid: number | s
   const referrer = await stake.getUserReferrer(address);
   const userData = await stake.getUserInfo(address);
   const userDividends = await stake.getUserDividends(address);
+  const totalReferralCount = await stake.getUserTotalReferrals(address);
   const allowance = await getUserAllowance(address, provider, chainid);
   const balance = await getUserTokenBalance(address, provider, chainid);
   let isDeposited = false;
@@ -72,6 +74,7 @@ export const getUserData = async (address: string, provider, chainid: number | s
     totalWithdrawn: formatEther(userData[1].toString()),
     totalReferrals: formatEther(userData[2].toString()),
     userDividends: formatEther(userDividends.toString()),
+    totalReferralCount: Number(totalReferralCount.toString()),
     address,
   };
 };
@@ -84,6 +87,31 @@ export const getUserTotalReferrals = async (
   const stake = loadContract(address, provider, chainid);
   const referrer = await stake.getUserTotalReferrals();
   return referrer.toString();
+};
+
+export const getUserDepositStats = async (
+  address: string,
+  provider,
+  chainid: number | string
+): Promise<IDepositStats[]> => {
+  const stakeContract = loadContract(address, provider, chainid);
+  const noOfDeposits = Number((await stakeContract.getUserAmountOfDeposits(address)).toString());
+
+  const data = await Promise.all(
+    Array.from({ length: noOfDeposits }).map(async (_, i) => {
+      const depositInfo = await stakeContract.getUserDepositInfo(address, i);
+      return {
+        plan: Number(depositInfo[0].toString()),
+        percent: Number(depositInfo[1].toString()),
+        amount: formatEther(depositInfo[2].toString()),
+        start: Number(depositInfo[3].toString()),
+        finish: Number(depositInfo[4].toString()),
+      };
+    })
+  );
+
+  console.log(data);
+  return data;
 };
 
 export const getUserTotalWithdrawn = async (
