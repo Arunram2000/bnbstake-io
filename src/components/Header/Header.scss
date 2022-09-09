@@ -10,7 +10,11 @@ header {
 
     .logo {
       img {
-        height: 50px;
+        width: 27rem;
+
+        @media (max-width: 576px) {
+          width: 20rem;
+        }
       }
     }
   }

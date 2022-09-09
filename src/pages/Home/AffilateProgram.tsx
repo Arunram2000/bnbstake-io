@@ -1,7 +1,14 @@
+import React, { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import { Button } from "components";
-import React from "react";
+import { formatNumber, getSlicedValue } from "helpers/utilities";
+import { useUserData } from "hooks";
 
 const AffilateProgram = () => {
+  const { isDeposited, address, totalReferralCount, totalReferrals } = useUserData();
+  const [copied, setCopied] = useState(false);
+
   return (
     <div className="affilate_program">
       <h3>Affiliate Program</h3>
@@ -44,17 +51,30 @@ const AffilateProgram = () => {
         <p className="font-medium mb-15">Your personal link</p>
         <div>
           <p>
-            <span>Not activated yet!</span>
+            {isDeposited ? (
+              <span>{`${window.location.origin}?ref_address=${getSlicedValue(address)}`}</span>
+            ) : (
+              <span>Not activated yet!</span>
+            )}
           </p>
-          <Button>Copy</Button>
+          {copied ? (
+            <Button variant="secondary">Copied</Button>
+          ) : (
+            <CopyToClipboard
+              text={`${window.location.origin}${address ? `?ref_address=${address}` : ""}`}
+              onCopy={() => setCopied(true)}
+            >
+              <Button>Copy</Button>
+            </CopyToClipboard>
+          )}
         </div>
       </section>
       <div className="flex-between">
         <p>
-          Invited Users <b>0</b>
+          Invited Users <b>{totalReferralCount}</b>
         </p>
         <p>
-          Total Earnings <b>0 BNB</b>
+          Total Earnings <b>{formatNumber(totalReferrals, 0, 8)} CRO</b>
         </p>
       </div>
     </div>

@@ -1,6 +1,6 @@
-import { ethers, utils } from "ethers";
+import { ethers } from "ethers";
 import { formatEther } from "helpers/utilities";
-import tokenABi from "./abi/bnbstake.json";
+import tokenABi from "./abi/tokenabi.json";
 import { STAKE_ADDRESS, TOKEN_ADDRESS } from "./address";
 
 export const loadTokenContract = (address: string, provider, chainid: string | number) => {
@@ -10,14 +10,9 @@ export const loadTokenContract = (address: string, provider, chainid: string | n
   return escrowContract;
 };
 
-export const getUserAllowance = async (
-  address: string,
-  provider: any,
-  chainId: any,
-  tokenaddress: any
-) => {
-  const token = loadTokenContract(address, provider, tokenaddress);
-  const allowance = await token.allowance(address, STAKE_ADDRESS[chainId]);
+export const getUserAllowance = async (address: string, provider: any, chainId: any) => {
+  const tokenContract = loadTokenContract(address, provider, chainId);
+  const allowance = await tokenContract.allowance(address, STAKE_ADDRESS[chainId]);
   return formatEther(allowance);
 };
 

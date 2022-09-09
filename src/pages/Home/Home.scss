@@ -3,10 +3,18 @@
     height: calc(100vh - 100px);
     position: relative;
     background: linear-gradient(180deg, #eeeeee 0%, #ffffff 100%);
-    padding: 0 15rem;
+    padding: 0 3rem;
 
     .mx {
       height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 80%;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
     }
 
     .hero_content {
@@ -15,7 +23,6 @@
       border-radius: 10px;
       justify-content: center;
       gap: 1rem;
-      max-width: 50%;
       width: 100%;
       height: 100%;
       position: relative;
@@ -24,24 +31,44 @@
       h1 {
         font-size: 8rem;
         line-height: 9rem;
+
+        @media (max-width: 1000px) {
+          font-size: 7rem;
+          line-height: 8rem;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 4rem;
+          line-height: 5rem;
+        }
       }
     }
 
     .hero_abstract {
-      position: absolute;
-      top: 50%;
-      left: 75%;
-      transform: translate(-50%, -50%);
-      z-index: 0;
-      width: 400px;
-      height: 400px;
+      // position: absolute;
+      // top: 50%;
+      // left: 75%;
+      // transform: translate(-50%, -50%);
+      // z-index: 0;
+      margin: auto;
+      max-width: 400px;
+      max-height: 400px;
+      width: 100%;
+      height: 100%;
+
+      position: relative;
 
       .logo1 {
         position: absolute;
         top: 0;
-        left: 0;
-        transform: translateX(-25%);
-        animation: logo1 4s linear infinite;
+        left: 0%;
+        transform: translateX(50%);
+        animation: logo1 5s linear infinite;
+
+        @media (max-width: 600px) {
+          width: 140px;
+          height: 130px;
+        }
 
         @keyframes logo1 {
           0%,
@@ -59,7 +86,12 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        animation: logo2 4s linear infinite;
+        animation: logo2 5s linear infinite;
+
+        @media (max-width: 600px) {
+          width: 300px;
+          height: 270px;
+        }
 
         @keyframes logo2 {
           0%,
@@ -75,8 +107,14 @@
       .logo3 {
         position: absolute;
         top: 0;
-        left: 35%;
-        animation: logo3 4s linear infinite;
+        left: 38%;
+        animation: logo3 5s linear infinite;
+        max-width: 100px;
+
+        @media (max-width: 600px) {
+          width: 60px;
+          height: 60px;
+        }
 
         @keyframes logo3 {
           0%,
@@ -134,6 +172,10 @@
         gap: 4rem;
         border-radius: 10px;
         box-shadow: inset -8px -8px 16px #26333c, inset 8px 8px 16px #58656e;
+
+        @media (max-width: 576px) {
+          padding: 4rem;
+        }
 
         .deposit_controls {
           display: flex;
@@ -210,6 +252,10 @@
         background: #dae7f0;
         box-shadow: inset -8px -8px 16px #c6d3dc, inset 8px 8px 16px #eefbff;
 
+        @media (max-width: 576px) {
+          padding: 4rem;
+        }
+
         .referral_link {
           padding: 1.6rem;
           border-radius: 10px;
@@ -229,6 +275,12 @@
               display: flex;
               align-items: center;
               padding: 0 1.6rem;
+              overflow-x: hidden;
+
+              span {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
             }
           }
         }
@@ -250,6 +302,11 @@
           gap: 1.6rem;
           margin: 1.6rem 0;
           align-items: flex-end;
+
+          @media (max-width: 576px) {
+            grid-template-columns: repeat(5, 50px);
+            gap: 1rem;
+          }
 
           > div {
             display: flex;
@@ -295,12 +352,11 @@
 
     .your-farm {
       display: flex;
-
       margin-bottom: 3rem;
       gap: 5rem;
 
-      @media (max-width: 1050px) {
-        grid-template-columns: 0.7fr 1fr;
+      @media (max-width: 800px) {
+        flex-direction: column;
       }
       .tire-deposite {
         text-align: center;
@@ -309,9 +365,20 @@
         gap: 3.2rem;
         max-width: 350px;
 
+        @media (max-width: 800px) {
+          max-width: 100%;
+          justify-content: center;
+          align-items: center;
+        }
+
         img {
+          max-width: 100%;
           width: 100%;
           height: auto;
+
+          @media (max-width: 800px) {
+            max-width: 350px;
+          }
         }
         .total-deposite {
           background-color: var(--color-background);
@@ -328,11 +395,12 @@
           text-align: left;
           border: 1px solid #eeeeee;
           padding: 1rem;
+          border-radius: 10px;
           .withdraw {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 1rem 9rem 1rem 0;
+            margin: 1rem 0;
             button {
               width: 14.5rem;
             }
@@ -341,12 +409,29 @@
         .last-deposits {
           border: 1px solid #eeeeee;
           padding: 1rem;
-          height: 23rem;
+          min-height: 23rem;
+          height: auto;
           margin: 2rem 0;
+          border-radius: 10px;
         }
         .farm-buttons {
           display: flex;
           justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 2rem;
+
+          @media (max-width: 800px) {
+            flex-direction: column;
+          }
+
+          > a {
+            flex: 1;
+            white-space: nowrap;
+
+            button {
+              width: 100%;
+            }
+          }
         }
       }
     }
@@ -372,6 +457,16 @@
       display: flex;
       justify-content: space-between;
       padding-top: 3rem;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+
+        .stake {
+          max-width: 350px;
+        }
+      }
+
       .stake {
         padding: 0px 1rem;
         h3 {
@@ -423,6 +518,24 @@
       span {
         font-weight: bold;
       }
+    }
+  }
+}
+
+.deposit_stats-table {
+  width: 100%;
+  padding: 2rem 0;
+
+  table {
+    width: 100%;
+
+    thead th {
+      font-weight: 500;
+    }
+
+    td,
+    th {
+      padding: 0.5rem 1rem;
     }
   }
 }

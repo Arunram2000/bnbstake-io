@@ -43,7 +43,7 @@ const WalletModal: React.FC<IWalletModal> = ({ modal, handleClose }) => {
           >
             <div className="wallet_modal-content">
               <div className="flex-gap">
-                <h4>Connect wallet</h4>
+                <h4 className="font-medium">Connect wallet</h4>
                 <img src={close} alt="close" width={24} height={24} onClick={() => handleClose()} />
               </div>
               <div className="wallet_wrapper">

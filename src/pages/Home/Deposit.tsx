@@ -5,6 +5,8 @@ import { Button } from "components";
 import { getPlanInfo } from "utils/methods";
 import { formatNumber } from "helpers/utilities";
 import { TransactionContext } from "store/context/TransactionContext";
+import { useUserData } from "hooks";
+import { useSearchParams } from "react-router-dom";
 
 type IPlan = {
   planId: number;
@@ -18,6 +20,9 @@ const Depoist = () => {
   const [selectedPlan, setSelectedPlan] = useState<IPlan | undefined>();
   const [depositAmount, setDepositAmount] = useState("1");
   const { setTransaction } = useContext(TransactionContext);
+  const { balance, referrer } = useUserData();
+  const [searchParams] = useSearchParams();
+  const ref_address = searchParams.get("ref_address");
 
   const handleGetplansData = useCallback(async () => {
     if (!account || !chainId) return;
@@ -40,11 +45,25 @@ const Depoist = () => {
   const handleInvest = async () => {
     try {
       if (!account || !chainId || !selectedPlan) return;
+      if (!balance || balance < Number(depositAmount))
+        return setTransaction({
+          loading: true,
+          status: "error",
+          message: "Insufficient token to deposit",
+        });
       setTransaction({ loading: true, status: "pending" });
-      setTransaction({ loading: true, status: "success" });
       const { invest } = await import("utils/methods");
-      await invest(account, library?.provider, chainId, "", selectedPlan.planId, depositAmount);
+      await invest(
+        account,
+        library?.provider,
+        chainId,
+        ref_address ? ref_address : referrer,
+        selectedPlan.planId,
+        depositAmount
+      );
+      setTransaction({ loading: true, status: "success" });
     } catch (error) {
+      console.log(error);
       setTransaction({ loading: true, status: "error" });
     }
   };
