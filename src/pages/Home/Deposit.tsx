@@ -70,6 +70,7 @@ const Depoist = () => {
         depositAmount
       );
       setTransaction({ loading: true, status: "success" });
+      setTimeout(() => window.location.reload(), 3000) 
     } catch (error) {
       console.log(error);
       setTransaction({ loading: true, status: "error" });
