@@ -27,10 +27,14 @@ const Depoist = () => {
 
   const handleGetplansData = useCallback(async () => {
     if (!account || !chainId) return;
-    const data = await getPlanInfo(account, library?.provider, chainId);
-    setMinimumDepositAmount(await getMinimumDepositAmount(account, library?.provider, chainId));
-    setPlans(data);
-    setSelectedPlan(data[0]);
+    try {
+      const data = await getPlanInfo(account, library?.provider, chainId);
+      setMinimumDepositAmount(await getMinimumDepositAmount(account, library?.provider, chainId));
+      setPlans(data);
+      setSelectedPlan(data[0]);
+    } catch (error) {
+      console.log(error);
+    }
   }, [account, chainId, library]);
 
   useEffect(() => {
@@ -70,6 +74,7 @@ const Depoist = () => {
         depositAmount
       );
       setTransaction({ loading: true, status: "success" });
+      setTimeout(() => window.location.reload(), 3000);
     } catch (error) {
       console.log(error);
       setTransaction({ loading: true, status: "error" });

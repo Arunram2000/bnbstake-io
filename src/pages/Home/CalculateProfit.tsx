@@ -6,7 +6,7 @@ const CalculateProfit = () => {
   return (
     <div className="calculate_profit" id="affiliate_program">
       <div className="mx pad">
-        <h2 className="mb-32 section_title">CALCULATE PROFIT</h2>
+        <h2 className="mb-32 section_title">Deposit And Earn $GRONA</h2>
         <div className="grid">
           <Depoist />
           <AffilateProgram />

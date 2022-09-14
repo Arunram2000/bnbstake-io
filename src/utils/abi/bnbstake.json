@@ -35,6 +35,10 @@
       {
         "name": "investamount",
         "type": "uint256"
+      },
+      {
+        "name": "uplinead",
+        "type": "address[]"
       }
     ],
     "name": "invest",
@@ -243,6 +247,25 @@
     "constant": true,
     "inputs": [],
     "name": "getContractBalance",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "getLevel",
     "outputs": [
       {
         "name": "",

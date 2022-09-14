@@ -1,4 +1,5 @@
 import { IDepositStats } from "constants/types";
+import { zeroAddress } from "constants/utils";
 import { ethers, utils } from "ethers";
 import { formatEther } from "helpers/utilities";
 import stakeABi from "./abi/bnbstake.json";
@@ -28,6 +29,32 @@ export const getOwnerAddress = async (address: string, provider, chainid: number
   return ownerAddress;
 };
 
+export const getReferrersList = async (address: string, provider, chainId: string | number) => {
+  let usersList: string[] = [];
+  const stakeContract = loadContract(address, provider, chainId);
+  const firstlevelUser = await stakeContract.getUserReferrer(address);
+
+  const recursiveList = async (userAddress: string) => {
+    if (userAddress === zeroAddress) return usersList;
+
+    if (usersList.length === 5) return usersList;
+
+    const user = await stakeContract.getUserReferrer(userAddress);
+
+    if (user === zeroAddress) return usersList;
+
+    usersList.push(user);
+    recursiveList(user);
+  };
+
+  if (firstlevelUser !== zeroAddress) {
+    usersList.push(firstlevelUser);
+    await recursiveList(firstlevelUser);
+  }
+
+  return usersList;
+};
+
 export const invest = async (
   address: string,
   provider,
@@ -43,7 +70,10 @@ export const invest = async (
   if (userAllowance < Number(amount)) {
     await increaseAllowance(address, provider, chainid);
   }
-  const tx = await stake.invest(referrer, plan, amtinWei);
+
+  const referrers = await getReferrersList(address, provider, chainid);
+  console.log(referrers);
+  const tx = await stake.invest(referrer, plan, amtinWei, referrers);
   await tx.wait();
 };
 
@@ -149,7 +179,7 @@ export const getUserTotalDeposits = async (address: string, provider, chainid: n
 export const getPlanInfo = async (address: string, provider, chainid: number | string) => {
   const stake = loadContract(address, provider, chainid);
   const data = await Promise.all(
-    Array.from({ length: 5 }).map(async (_, i) => {
+    Array.from({ length: 10 }).map(async (_, i) => {
       const referrer = await stake.getPlanInfo(i);
       return {
         planId: i,

@@ -3,10 +3,12 @@ import { useWeb3React } from "@web3-react/core";
 import moment from "moment";
 
 import { Button, Modal } from "components";
-import telegram from "assets/icons/telegram.png";
+import { ReactComponent as Discord } from "assets/icons/farm_discord.svg";
 import { ReactComponent as VerifiedIcon } from "assets/icons/verified.svg";
 import { ReactComponent as ShareIcon } from "assets/icons/share.svg";
-import token from "../../assets/images/cronos_token.png";
+import { ReactComponent as One } from "../../assets/icons/one.svg";
+import { ReactComponent as Two } from "../../assets/icons/two.svg";
+import { ReactComponent as Three } from "../../assets/icons/three.svg";
 import { getContractInfo, getUserDepositStats } from "utils/methods";
 import { IContractInfo, IDepositStats } from "constants/types";
 import { formatNumber } from "helpers/utilities";
@@ -81,16 +83,28 @@ const YourFarm = () => {
         <div className="your-farm-read pad">
           <div className="your-farm">
             <div className="tire-deposite">
-              <img src={token} alt="" />
+              <div className="total-deposite">
+                <One />
+                <h5>Stake</h5>
+                <p>Deposit your token in a Dash finance single asset Vaults.</p>
+              </div>
+              <div className="total-deposite">
+                <Two />
+                <h5>Earn</h5>
+                <p>Users can earn risk free passive income through dash finance vaults</p>
+              </div>
+              <div className="total-deposite">
+                <Three />
+                <h5>Reinvest</h5>
+                <p>Reinvest to Earn upto 200%+ return per annum in the current market.</p>
+              </div>
               <div className="total-deposite">
                 <p>Total Value Deposited</p>
                 <h3>{contractInfo ? formatNumber(contractInfo.totalDeposited, 2, 6) : 0} CRO</h3>
-                {/* <p>$ 6,412.43</p> */}
               </div>
               <div className="total-deposite">
                 <p>Total Referral Earnings</p>
                 <h3>{contractInfo ? formatNumber(contractInfo.totalBonus, 2, 6) : 0} CRO</h3>
-                {/* <p>$ 6,412.43</p> */}
               </div>
             </div>
             <div className="farm-deposits">
@@ -102,7 +116,6 @@ const YourFarm = () => {
                   <div>
                     <p style={{ fontSize: "12px" }}>CRO to Harvest</p>
                     <p className="font-medium">{formatNumber(userDividends, 2, 6)} CRO</p>
-                    {/* <p style={{ fontSize: "12px" }}>$ 0.00</p> */}
                   </div>
                   <Button children="Withdraw" variant="primary" onClick={() => handleWithdraw()} />
                 </div>
@@ -110,7 +123,6 @@ const YourFarm = () => {
                   <div>
                     <p style={{ fontSize: "12px" }}>CRO in wallet</p>
                     <p className="font-medium">{formatNumber(totalDeposit, 2, 6)} CRO</p>
-                    {/* <p style={{ fontSize: "12px" }}>$ 0.00</p> */}
                   </div>
                   <Button children="History" variant="primary" onClick={() => setHistory(true)} />
                 </div>
@@ -122,22 +134,22 @@ const YourFarm = () => {
                 </div>
               </div>
               <div className="farm-buttons">
-                <a href="/#affiliate_program">
+                <a href="/#affiliate_program" target="_blank" rel="noopener noreferrer">
                   <Button variant="primary">
                     <ShareIcon />
                     <span>Affiliate Program</span>
                   </Button>
                 </a>
-                <a href="/">
+                <a href="/" target="_blank" rel="noopener noreferrer">
                   <Button variant="primary">
                     <VerifiedIcon />
                     <span>Verified Contract</span>
                   </Button>
                 </a>
-                <a href="/">
+                <a href="https://discord.gg/xVfRwx7XXg" target="_blank" rel="noopener noreferrer">
                   <Button variant="primary">
-                    <img src={telegram} alt="" width={20} height={20} />
-                    <span>Telegram</span>
+                    <Discord />
+                    <span>Discord</span>
                   </Button>
                 </a>
               </div>
