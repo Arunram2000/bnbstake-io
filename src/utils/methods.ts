@@ -29,35 +29,31 @@ export const getOwnerAddress = async (address: string, provider, chainid: number
   return ownerAddress;
 };
 
-export const getReferrersList = async (
-  address: string,
-  provider,
-  chainId: string | number,
-  existingReferrer?: string
-) => {
-  let usersList: string[] = existingReferrer ? [existingReferrer] : [];
+export const getReferrersList = async (address: string, provider, chainId: string | number) => {
+  // let usersList: string[] = [];
   const stakeContract = loadContract(address, provider, chainId);
   const firstlevelUser = await stakeContract.getUserReferrer(address);
 
-  const recursiveList = async (userAddress: string) => {
-    if (userAddress === zeroAddress) return usersList;
+  if (firstlevelUser === zeroAddress) return [];
 
-    if (usersList.length === 5) return usersList;
+  const secondlevelUser = await stakeContract.getUserReferrer(firstlevelUser);
 
-    const user = await stakeContract.getUserReferrer(userAddress);
+  if (secondlevelUser === zeroAddress) return [firstlevelUser];
 
-    if (user === zeroAddress) return usersList;
+  const thirdlevelUser = await stakeContract.getUserReferrer(secondlevelUser);
 
-    usersList.push(user);
-    recursiveList(user);
-  };
+  if (thirdlevelUser === zeroAddress) return [firstlevelUser, secondlevelUser];
 
-  if (firstlevelUser !== zeroAddress) {
-    usersList.push(firstlevelUser);
-    await recursiveList(firstlevelUser);
-  }
+  const fourthlevelUser = await stakeContract.getUserReferrer(thirdlevelUser);
 
-  return usersList;
+  if (fourthlevelUser === zeroAddress) return [firstlevelUser, secondlevelUser, thirdlevelUser];
+
+  const fifthlevelUser = await stakeContract.getUserReferrer(fourthlevelUser);
+
+  if (fifthlevelUser === zeroAddress)
+    return [firstlevelUser, secondlevelUser, thirdlevelUser, fourthlevelUser];
+
+  return [firstlevelUser, secondlevelUser, thirdlevelUser, fourthlevelUser, firstlevelUser];
 };
 
 export const invest = async (
@@ -68,9 +64,7 @@ export const invest = async (
   plan: number,
   amount: string
 ) => {
-  console.log(referrerAddress);
   let referrer = referrerAddress;
-  let devWallet = zeroAddress;
   const stake = loadContract(address, provider, chainid);
   const amtinWei = utils.parseEther(amount.toString()).toString();
   const userAllowance = await getUserAllowance(address, provider, chainid);
@@ -79,19 +73,19 @@ export const invest = async (
     await increaseAllowance(address, provider, chainid);
   }
 
-  if (referrer === zeroAddress) {
-    devWallet = await stake.devWallet();
-    referrer = devWallet;
-  }
+  const referrers = await getReferrersList(address, provider, chainid);
 
-  let referrers = await getReferrersList(address, provider, chainid);
-
-  if (referrers.length === 0 && referrer !== devWallet) {
-    referrers = await getReferrersList(referrer, provider, chainid, referrer);
+  if (referrers.length === 0 && referrer !== zeroAddress) {
+    const referrers = [referrer, ...(await getReferrersList(referrer, provider, chainid))];
+    const tx = await stake.invest(referrer, plan, amtinWei, referrers);
+    await tx.wait();
+  } else {
+    if (referrer === zeroAddress) {
+      referrer = await stake.devWallet();
+    }
+    const tx = await stake.invest(referrer, plan, amtinWei, referrers);
+    await tx.wait();
   }
-  console.log(referrer, referrers);
-  const tx = await stake.invest(referrer, plan, amtinWei, referrers);
-  await tx.wait();
 };
 
 export const withdraw = async (address: string, provider, chainid: number | string) => {
