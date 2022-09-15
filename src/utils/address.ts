@@ -1,12 +1,10 @@
 const TOKEN_ADDRESS = {
-  4: "",
-  97: "",
+  25: "0x3916598d3c1aa1252d3f7bf5b428b1303d87a9cc",
   338: "0x44906f372663826D56E5a3fC999cDC6e9EAD1673",
 };
 
 const STAKE_ADDRESS = {
-  4: "",
-  97: "",
+  25: "0xf4d12e06f80f822e5f73f56c5ba8c437149fa52d",
   338: "0x29cAd45CcF54ef6D38D5a7DC48343fc63b360511",
 };
 
