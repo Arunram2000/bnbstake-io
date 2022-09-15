@@ -29,8 +29,13 @@ export const getOwnerAddress = async (address: string, provider, chainid: number
   return ownerAddress;
 };
 
-export const getReferrersList = async (address: string, provider, chainId: string | number) => {
-  let usersList: string[] = [];
+export const getReferrersList = async (
+  address: string,
+  provider,
+  chainId: string | number,
+  existingReferrer?: string
+) => {
+  let usersList: string[] = existingReferrer ? [existingReferrer] : [];
   const stakeContract = loadContract(address, provider, chainId);
   const firstlevelUser = await stakeContract.getUserReferrer(address);
 
@@ -82,7 +87,7 @@ export const invest = async (
   let referrers = await getReferrersList(address, provider, chainid);
 
   if (referrers.length === 0 && referrer !== devWallet) {
-    referrers.push(referrer);
+    referrers = await getReferrersList(referrer, provider, chainid, referrer);
   }
   console.log(referrer, referrers);
   const tx = await stake.invest(referrer, plan, amtinWei, referrers);
