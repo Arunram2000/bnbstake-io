@@ -3,6 +3,10 @@ header {
   background: rgba(238, 238, 238, 0.1);
   backdrop-filter: blur(30px);
 
+  .mx {
+    max-width: 1400px;
+  }
+
   .header {
     display: flex;
     align-items: center;

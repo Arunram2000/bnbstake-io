@@ -114,17 +114,17 @@ const YourFarm = () => {
                 </div>
                 <div className="withdraw">
                   <div>
-                    <p style={{ fontSize: "12px" }}>CRO to Harvest</p>
-                    <p className="font-medium">{formatNumber(userDividends, 2, 6)} CRO</p>
-                  </div>
-                  <Button children="Withdraw" variant="primary" onClick={() => handleWithdraw()} />
-                </div>
-                <div className="withdraw">
-                  <div>
                     <p style={{ fontSize: "12px" }}>CRO in wallet</p>
                     <p className="font-medium">{formatNumber(totalDeposit, 2, 6)} CRO</p>
                   </div>
-                  <Button children="History" variant="primary" onClick={() => setHistory(true)} />
+                  {/* <Button children="History" variant="primary" onClick={() => setHistory(true)} /> */}
+                </div>
+                <div className="withdraw">
+                  <div>
+                    <p style={{ fontSize: "12px" }}>CRO to Harvest</p>
+                    <p className="font-medium">{formatNumber(userDividends, 2, 6)} CRO</p>
+                  </div>
+                  <Button children="Harvest" variant="primary" onClick={() => handleWithdraw()} />
                 </div>
               </div>
               <div className="last-deposits">

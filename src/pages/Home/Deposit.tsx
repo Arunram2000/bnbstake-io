@@ -123,12 +123,19 @@ const Depoist = () => {
         </div>
         <div>
           <p>In 50 days you will earn</p>
-          <span>{formatNumber(totalReturns, 4)} BNB</span>
+          <span>{formatNumber(totalReturns, 2)} BNB</span>
         </div>
       </section>
-      <Button variant="secondary" onClick={() => handleInvest()}>
-        Invest
-      </Button>
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        <Button variant="secondary" onClick={() => handleInvest()}>
+          Invest
+        </Button>
+        <p>
+          <strong style={{ fontWeight: "600" }}>Disclaimer:</strong> All deposits are subjected to
+          10% deposit tax and The principal deposit cannot be withdrawn, users get only return as
+          daily dividends and referral rewards.
+        </p>
+      </div>
     </div>
   );
 };
