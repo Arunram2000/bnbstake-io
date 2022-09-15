@@ -59,11 +59,13 @@ export const invest = async (
   address: string,
   provider,
   chainid: number | string,
-  referrer: string,
+  referrerAddress: string,
   plan: number,
   amount: string
 ) => {
-  console.log(referrer);
+  console.log(referrerAddress);
+  let referrer = referrerAddress;
+  let devWallet = zeroAddress;
   const stake = loadContract(address, provider, chainid);
   const amtinWei = utils.parseEther(amount.toString()).toString();
   const userAllowance = await getUserAllowance(address, provider, chainid);
@@ -72,8 +74,17 @@ export const invest = async (
     await increaseAllowance(address, provider, chainid);
   }
 
-  const referrers = await getReferrersList(address, provider, chainid);
-  console.log(referrers);
+  if (referrer === zeroAddress) {
+    devWallet = await stake.devWallet();
+    referrer = devWallet;
+  }
+
+  let referrers = await getReferrersList(address, provider, chainid);
+
+  if (referrers.length === 0 && referrer !== devWallet) {
+    referrers.push(referrer);
+  }
+  console.log(referrer, referrers);
   const tx = await stake.invest(referrer, plan, amtinWei, referrers);
   await tx.wait();
 };
@@ -93,10 +104,6 @@ export const getUserData = async (address: string, provider, chainid: number | s
   const allowance = await getUserAllowance(address, provider, chainid);
   const balance = await getUserTokenBalance(address, provider, chainid);
   let isDeposited = false;
-
-  if (referrer === zeroAddress) {
-    referrer = await stake.devWallet();
-  }
 
   try {
     await stake.getUserDepositInfo(address, 0);
