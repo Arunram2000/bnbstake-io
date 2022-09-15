@@ -63,6 +63,7 @@ export const invest = async (
   plan: number,
   amount: string
 ) => {
+  console.log(referrer);
   const stake = loadContract(address, provider, chainid);
   const amtinWei = utils.parseEther(amount.toString()).toString();
   const userAllowance = await getUserAllowance(address, provider, chainid);
@@ -85,13 +86,17 @@ export const withdraw = async (address: string, provider, chainid: number | stri
 
 export const getUserData = async (address: string, provider, chainid: number | string) => {
   const stake = loadContract(address, provider, chainid);
-  const referrer = await stake.getUserReferrer(address);
+  let referrer = await stake.getUserReferrer(address);
   const userData = await stake.getUserInfo(address);
   const userDividends = await stake.getUserDividends(address);
   const totalReferralCount = await stake.getUserTotalReferrals(address);
   const allowance = await getUserAllowance(address, provider, chainid);
   const balance = await getUserTokenBalance(address, provider, chainid);
   let isDeposited = false;
+
+  if (referrer === zeroAddress) {
+    referrer = await stake.devWallet();
+  }
 
   try {
     await stake.getUserDepositInfo(address, 0);
